@@ -77,7 +77,7 @@ fs.stat('index.js', (error, stats) => {
  * callback { Function } 回调，传递一个异常参数 err。
  * 会清除原来文件所有数据，重新写入
  */
-fs.writeFile('08_WebService/read.md', '-我是read.md', (err) => {
+fs.writeFile('08_ext.json', '', (err) => {
   if(err) {
     console.log(err);
     return false;

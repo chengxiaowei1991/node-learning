@@ -48,18 +48,18 @@ http.createServer(function (req, res) {
     console.log(result.query.userName); // jsliang
 
     console.log(result.query.userAge); // 23
+    // 设置 HTTP 头部，状态码是 200，文件类型是 html，字符集是 utf8
+    // 结束响应
   }
-  console.log(req.url)
-
-  // 设置 HTTP 头部，状态码是 200，文件类型是 html，字符集是 utf8
   res.writeHead(200, {
     "Content-Type": "text/html;charset=UTF-8"
   });
 
   // 往页面打印值
   res.write('<h1 style="text-align:center">Hello NodeJS</h1>');
-
-  // 结束响应
+      
   res.end();
+  console.log(req.url)
+
 
 }).listen(8888);
