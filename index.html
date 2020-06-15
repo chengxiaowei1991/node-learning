@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-⌃-Compatible" content="ie=edge">
+  <title>Node Web</title>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Todo List</h1>
+    <ul id="list">
+    </ul>
+    <input type="text" v-model="item">
+    <button id="btn" onclick="btnClick()">添加</button>
+  </div>
+  <script>
+    var xhr = new XMLHttpRequest();
+    let items = null;
+    ajax = (url, method) => {
+      return new Promise((resolve) => {
+        let data = null;
+        xhr.onreadystatechange = function(){
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            //7,获取返回值，解析json格式字符串为对象
+            data = JSON.parse(xhr.responseText);
+            resolve(data);
+          } else {
+            // console.log(xhr);
+          }
+        }
+        xhr.onloadstart = function(){
+          console.log('onloadStart');
+        }
+        xhr.onload = function(){
+            console.log('onload');
+          }
+        xhr.open(method, url, true);
+        xhr.send();
+      })
+    }
+   
+    var getData = ajax('http://localhost:3000/','GET');
+    // console.log(getData, 'data')
+    getData.then(res => {
+      console.log("\n【API - get 数据】");
+      items = res;
+      res.forEach(item => {
+        let li = document.createElement('li');
+        li.innerHTML = item;
+        let ul = document.getElementById('list');
+        ul.insertBefore(li, ul.lastChild);
+      });
+    }).catch(function (err) {
+      console.log(err)
+    })
+    function btnClick() {
+      var postData = ajax('http://localhost:3000/','POST', {
+        item: this.item
+      });
+      postData.then(res => {
+        console.log("\n【API - post 数据】")
+        console.log(res);
+        items.push(...res.data);
+      }).catch(function (err) {
+        console.log(err)
+      })
+    }
+  </script>
+  <!-- <script>
+    new Vue({
+      el: document.getElementById('app'),
+      data: function () {
+        return {
+          items: [],
+          item: '',
+        }
+      },
+      created() {
+        // 进入页面请求数据
+        axios.get('http://localhost:3000/').then(res => {
+          console.log("\n【API - get 数据】");
+          console.log(res);
+          this.items = res.data;
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      methods: {
+        // 点击按钮提交数据
+        postApi() {
+          axios.post('http://localhost:3000/', {
+            item: this.item
+          }).then(res => {
+            console.log("\n【API - post 数据】")
+            console.log(res);
+            this.items = res.data;
+          }).catch(function (err) {
+            console.log(err)
+          })
+        }
+      }
+    })
+  </script> -->
+</body>
+
+</html>

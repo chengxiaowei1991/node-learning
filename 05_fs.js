@@ -2,7 +2,7 @@ let fs = require('fs');
 /**
  * 检测文件是目录还是文件
  */
-fs.stat('index.js', (error, stats) => {
+fs.stat('helloWorld.js', (error, stats) => {
   if(error) {
     console.log(error);
     return false;
@@ -88,7 +88,7 @@ fs.writeFile('08_WebService/read.md', '-我是read.md', (err) => {
 /**
  * 删除文件
  */
-// fs.unlink('index.js', (err) => {
+// fs.unlink('helloWorld.js', (err) => {
 //   if(err) {
 //     console.log(err)
 //     return;
@@ -99,7 +99,7 @@ fs.writeFile('08_WebService/read.md', '-我是read.md', (err) => {
 /**
  * 追加内容
  */
-fs.appendFile('index.js', '\n//这段文本是要追加的内容', (err) => {
+fs.appendFile('helloWorld.js', '\n//这段文本是要追加的内容', (err) => {
   if(err) {
     console.log(err);
     return false;
@@ -110,7 +110,7 @@ fs.appendFile('index.js', '\n//这段文本是要追加的内容', (err) => {
 /**
  * 读取文件
  */
-fs.readFile('index.js', (err, data) => {
+fs.readFile('helloWorld.js', (err, data) => {
   if (err) {
     console.log(err);
     return false;
@@ -134,7 +134,7 @@ fs.readdir('node_modules', (err, data) => {
 /**
  * 重命名文件
  */
-// fs.rename('index.js', 'index_rename', (err) => {
+// fs.rename('helloWorld.js', 'helloWorld_rename', (err) => {
 //   if(err) {
 //     console.log(err);
 //     return;
@@ -145,7 +145,7 @@ fs.readdir('node_modules', (err, data) => {
 /**
  * 剪切文件
  */
-fs.rename('index_rename', 'node_modules/index.js', (err) => {
+fs.rename('helloWorld_rename', 'node_modules/helloWorld.js', (err) => {
   if(err) {
     console.log(err);
     return;
